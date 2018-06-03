@@ -1,9 +1,11 @@
 package P001_Jira;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +29,9 @@ public class C001_Jira_01 {
     static String userName = "ivnzak";
     static String userPass = "123Qwerty";
 
+    static String userNameWrong = "qqq";
+    static String userPassWrong = "111";
+
     static String dataStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
     static String taskSummary = "Test_AQA_issue: " + dataStamp;
 
@@ -43,14 +48,13 @@ public class C001_Jira_01 {
 
         browser = new ChromeDriver(options);
 
-        browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        browser.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 
     @AfterTest
-    public void closeChrome() throws InterruptedException {
+    public void closeChrome() {
 
-        //Thread.sleep(10000);
         browser.quit();
 
         // my additional debug info
@@ -60,10 +64,10 @@ public class C001_Jira_01 {
 
     }
 
-
+//
 //    @DataProvider (name = "just for example")
-//    public static Object[][] dataProvider() {
-//        return new Object[][]{{0, 9, 100, 10}, {0, 100, 10000, 2},};
+//    public static Object[][] dataProvider1() {
+//        return new Object[][]{{"ivnzak", "123"}, {"ivnzak", "123Qwerty"},};
 //    }
 
 
@@ -75,7 +79,7 @@ public class C001_Jira_01 {
         clearAndFill(By.cssSelector("input#login-form-password"), userPass).submit();
 
         String pageData = browser.findElement(By.cssSelector("#header-details-user-fullname")).getAttribute("data-username");
-        System.out.println("0:: pageData: "+ pageData);
+        System.out.println("0:: pageData: " + pageData);
 
         Assert.assertEquals(userName, pageData);
         Assert.assertTrue(pageData.contains(userName), "Negative case message: TC001");
@@ -94,12 +98,12 @@ public class C001_Jira_01 {
         browser.findElement(By.id("assign-to-me-trigger")).click();
         browser.findElement(By.id("create-issue-submit")).click();
 
-        System.out.println("1:: taskSummary: "+taskSummary);
+        System.out.println("1:: taskSummary: " + taskSummary);
 
-        clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary+"\n");
+        clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary + "\n");
         String pageData2 = browser.findElement(By.cssSelector("#summary-val")).getText();
 
-        System.out.println("2:: pageData2: "+ pageData2);
+        System.out.println("2:: pageData2: " + pageData2);
 
         Assert.assertEquals(taskSummary, pageData2);
         Assert.assertTrue(pageData2.contains(taskSummary), "Negative case message: TC002");
@@ -110,13 +114,30 @@ public class C001_Jira_01 {
     @Test(description = "Open Issue", priority = 3)
     public void TC003() {
 
+        String pageData3 = browser.findElement(By.cssSelector("#key-val")).getAttribute("data-issue-key");
+        System.out.println("3:: pageData3: " + pageData3);
+
+        browser.get("http://jira.hillel.it:8080/browse/" + pageData3);
+
+        String pageData2 = browser.findElement(By.cssSelector("#summary-val")).getText();
+        Assert.assertTrue(pageData2.contains(taskSummary), "Negative case message: TC003");
     }
 
 
     @Test(description = "Login to Jira - Negative scenario", priority = 4)
     public void TC004() {
 
+        String logOut = (browser.findElement(By.id("log_out")).getAttribute("href"));
+        browser.get(logOut);
 
+        browser.get(baseURL);
+        clearAndFill(By.cssSelector("input#login-form-username"), userNameWrong);
+        clearAndFill(By.cssSelector("input#login-form-password"), userPassWrong).submit();
+
+        String pageData4 = browser.findElement(By.cssSelector("#usernameerror")).getText();
+        System.out.println("4:: pageData: " + pageData4);
+
+        Assert.assertTrue(pageData4.contains("Sorry, your username and password are incorrect - please try again."), "Negative case message: TC001");
 
     }
 
