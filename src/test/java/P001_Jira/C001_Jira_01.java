@@ -102,7 +102,7 @@ public class C001_Jira_01 {
 
         clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary + "\n");
         String pageData2 = browser.findElement(By.cssSelector("#summary-val")).getText();
-
+        
         System.out.println("2:: pageData2: " + pageData2);
 
         Assert.assertEquals(taskSummary, pageData2);
@@ -137,7 +137,7 @@ public class C001_Jira_01 {
         String pageData4 = browser.findElement(By.cssSelector("#usernameerror")).getText();
         System.out.println("4:: pageData: " + pageData4);
 
-        Assert.assertTrue(pageData4.contains("Sorry, your username and password are incorrect - please try again."), "Negative case message: TC001");
+        Assert.assertTrue(pageData4.contains("Sorry, your username and password are incorrect - please try again."), "Negative case message: TC004");
 
     }
 
