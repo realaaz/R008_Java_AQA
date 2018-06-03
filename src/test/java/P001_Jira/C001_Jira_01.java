@@ -27,8 +27,8 @@ public class C001_Jira_01 {
     static String userName = "ivnzak";
     static String userPass = "123Qwerty";
 
-    static String dateStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
-    static String taskSummary = "Test_AQA_issue: " + dateStamp;
+    static String dataStamp = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").format(new Date());
+    static String taskSummary = "Test_AQA_issue: " + dataStamp;
 
 
     @BeforeTest
@@ -50,8 +50,8 @@ public class C001_Jira_01 {
     @AfterTest
     public void closeChrome() throws InterruptedException {
 
-        Thread.sleep(10000);
-        browser.quit();
+        //Thread.sleep(10000);
+        //browser.quit();
 
         // my additional debug info
         System.out.println("> Time used: " + "\t" + (System.currentTimeMillis() - startTime) + " milliseconds");
@@ -62,10 +62,10 @@ public class C001_Jira_01 {
     }
 
 
-    @DataProvider (name = "just for example")
-    public static Object[][] dataProvider() {
-        return new Object[][]{{0, 9, 100, 10}, {0, 100, 10000, 2},};
-    }
+//    @DataProvider (name = "just for example")
+//    public static Object[][] dataProvider() {
+//        return new Object[][]{{0, 9, 100, 10}, {0, 100, 10000, 2},};
+//    }
 
 
     @Test(description = "Login to Jira - Positive scenario", priority = 1)
@@ -80,7 +80,6 @@ public class C001_Jira_01 {
         Assert.assertEquals(userName, pageData);
         Assert.assertTrue(pageData.contains(userName), "Negative case message: TC001");
 
-
     }
 
 
@@ -91,23 +90,18 @@ public class C001_Jira_01 {
 
         browser.findElement(By.id("create_link")).click();
 
-        Thread.sleep(4000);
-
         browser.findElement(By.id("summary")).sendKeys(taskSummary);
         browser.findElement(By.id("assign-to-me-trigger")).click();
         browser.findElement(By.id("create-issue-submit")).click();
 
-        Thread.sleep(4000);
+//        String pageData = browser.findElement(By.cssSelector(".ghx-issue-content")).getAttribute("data-username");
+//        List <WebElement> tasksList = browser.findElements(By.cssSelector(".ghx-summary")).;
+//        Assert.assertTrue(tasksList.size() !=0, "Negative case message: TC002");
+//        for(int i=0;i<tasksList.size();i++){
+//            System.out.println(tasksList.get(i));
+//        }
 
-        String pageData = browser.findElement(By.cssSelector(".ghx-issue-content")).getAttribute("data-username");
-
-        List <WebElement> tasksList = browser.findElements(By.cssSelector(".ghx-summary")).;
-
-        Assert.assertTrue(tasksList.size() !=0, "Negative case message: TC002");
-
-        for(int i=0;i<tasksList.size();i++){
-            System.out.println(tasksList.get(i));
-        }
+        clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary+"\n");
 
     }
 
