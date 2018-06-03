@@ -51,14 +51,13 @@ public class C001_Jira_01 {
     public void closeChrome() throws InterruptedException {
 
         //Thread.sleep(10000);
-        //browser.quit();
+        browser.quit();
 
         // my additional debug info
         System.out.println("> Time used: " + "\t" + (System.currentTimeMillis() - startTime) + " milliseconds");
         long usedBytes = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         System.out.println("> Memory Used: " + "\t" + usedBytes + " bytes (" + usedBytes / 1048576.0 + " Megabytes)");
 
-        System.out.println(taskSummary);
     }
 
 
@@ -76,6 +75,7 @@ public class C001_Jira_01 {
         clearAndFill(By.cssSelector("input#login-form-password"), userPass).submit();
 
         String pageData = browser.findElement(By.cssSelector("#header-details-user-fullname")).getAttribute("data-username");
+        System.out.println("0:: pageData: "+ pageData);
 
         Assert.assertEquals(userName, pageData);
         Assert.assertTrue(pageData.contains(userName), "Negative case message: TC001");
@@ -94,14 +94,15 @@ public class C001_Jira_01 {
         browser.findElement(By.id("assign-to-me-trigger")).click();
         browser.findElement(By.id("create-issue-submit")).click();
 
-//        String pageData = browser.findElement(By.cssSelector(".ghx-issue-content")).getAttribute("data-username");
-//        List <WebElement> tasksList = browser.findElements(By.cssSelector(".ghx-summary")).;
-//        Assert.assertTrue(tasksList.size() !=0, "Negative case message: TC002");
-//        for(int i=0;i<tasksList.size();i++){
-//            System.out.println(tasksList.get(i));
-//        }
+        System.out.println("1:: taskSummary: "+taskSummary);
 
         clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary+"\n");
+        String pageData2 = browser.findElement(By.cssSelector("#summary-val")).getText();
+
+        System.out.println("2:: pageData2: "+ pageData2);
+
+        Assert.assertEquals(taskSummary, pageData2);
+        Assert.assertTrue(pageData2.contains(taskSummary), "Negative case message: TC002");
 
     }
 
@@ -114,6 +115,8 @@ public class C001_Jira_01 {
 
     @Test(description = "Login to Jira - Negative scenario", priority = 4)
     public void TC004() {
+
+
 
     }
 
