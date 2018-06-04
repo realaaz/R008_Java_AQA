@@ -8,28 +8,36 @@
     <artifactId>Java_AQA</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
     <dependencies>
 
-        <!-- selenium 3.11.0 -->
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.11.0</version>
+            <version>3.12.0</version>
         </dependency>
 
-        <!-- googlecode.json-simple 1.1.1 -->
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
 
-        <!-- testng 6.14.2 -->
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.14.2</version>
+            <version>6.14.3</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.12.1</version>
         </dependency>
 
     </dependencies>
