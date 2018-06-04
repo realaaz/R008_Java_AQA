@@ -41,7 +41,7 @@ public class C001_Jira_01 {
 
         startTime = System.currentTimeMillis();
 
-        System.setProperty("webdriver.chrome.driver", "/Users/ivanzakoretskyi/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "/Users/ivanzakoretskyi/Drivers/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized", "--incognito");
@@ -102,7 +102,7 @@ public class C001_Jira_01 {
 
         clearAndFill(By.cssSelector("input#quickSearchInput"), taskSummary + "\n");
         String pageData2 = browser.findElement(By.cssSelector("#summary-val")).getText();
-        
+
         System.out.println("2:: pageData2: " + pageData2);
 
         Assert.assertEquals(taskSummary, pageData2);
