@@ -11,6 +11,10 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+
+
+// http://www.autotest.org.ua/selenide-quick-start-in-automation-testing/
+
 public class C004_Selenide {
 
     @BeforeClass
