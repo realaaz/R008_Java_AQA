@@ -21,7 +21,7 @@ public class C001_Jira_UDFile {
     static String baseURL = "http://jira.hillel.it:8080/";
     static String userName = "ivnzak";
     static String userPass = "123Qwerty";
-    //static String someFile = "/Users/ivanzakoretskyi/Projects/2018/10_Java_AQA/upl_downl_file.txt";
+    static String someFileF = "/Users/ivanzakoretskyi/Projects/2018/10_Java_AQA/upl_downl_file.txt";
     static String someFile = "upl_downl_file.txt";
 
 
@@ -60,6 +60,9 @@ public class C001_Jira_UDFile {
         browser.get("http://jira.hillel.it:8080/browse/GQR-783");
         browser.findElement(By.className("issue-drop-zone__button")).click();
 
+        browser.findElement(By.className("issue-drop-zone__file ignore-inline-attach")).sendKeys(someFileF);
+
+        Thread.sleep(2500);
 
         Robot r = new Robot();
 
@@ -73,6 +76,7 @@ public class C001_Jira_UDFile {
         r.keyRelease(KeyEvent.VK_ENTER);
 
         Thread.sleep(5000);
+
 
     }
 
