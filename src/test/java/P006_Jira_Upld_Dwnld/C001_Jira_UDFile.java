@@ -60,22 +60,18 @@ public class C001_Jira_UDFile {
         browser.get("http://jira.hillel.it:8080/browse/GQR-783");
         browser.findElement(By.className("issue-drop-zone__button")).click();
 
-        browser.findElement(By.className("issue-drop-zone__file ignore-inline-attach")).sendKeys(someFileF);
+        browser.findElement(By.className("issue-drop-zone__file")).sendKeys(someFileF);
 
         Thread.sleep(2500);
 
-        Robot r = new Robot();
-
-        // select file U
-        r.keyPress(KeyEvent.VK_U);
-        // я теряю фокус ((
-
-        Thread.sleep(2500);
-
-        r.keyPress(KeyEvent.VK_ENTER);
-        r.keyRelease(KeyEvent.VK_ENTER);
-
-        Thread.sleep(5000);
+//        Robot r = new Robot();
+//        // select file U
+//        r.keyPress(KeyEvent.VK_U);
+//        // я теряю фокус ((
+//        Thread.sleep(2500);
+//        r.keyPress(KeyEvent.VK_ENTER);
+//        r.keyRelease(KeyEvent.VK_ENTER);
+//        ///Thread.sleep(5000);
 
 
     }
